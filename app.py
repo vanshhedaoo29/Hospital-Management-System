@@ -1,19 +1,46 @@
-from app import db
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
+app = Flask(__name__)
 
-class Admin(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
+# 📌 Step 4: Setup SQLite database path
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hospital.db'  # This creates hospital.db file
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # (Just to silence a warning)
 
-class Appointment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
-    doctor_name = db.Column(db.String(100))
-    date = db.Column(db.String(100))
-    time = db.Column(db.String(100))
+# 📦 Step 5: Initialize database
+db = SQLAlchemy(app)
+
+@app.route("/")
+def hello_world():
+    return render_template('index.html')
+
+@app.route("/appointments")
+def appointments():
+    return render_template('appointment.html')
+
+@app.route("/doctors")
+def doctors():
+    return render_template('doctor.html')
+
+@app.route("/aboutus")
+def about_us():
+    return render_template('aboutus.html')
+
+@app.route("/login")
+def login():
+    return render_template('patient.html')
+
+@app.route("/signup")
+def signup():
+    return render_template('patient-register.html')
+
+@app.route("/admin-login")
+def admin_login():
+    return render_template('admin.html')
+
+@app.route("/admin-signup")
+def admin_signup():
+    return render_template('admin-register.html')
+
+if __name__ == "__main__":
+    app.run(debug=True, port=6969)

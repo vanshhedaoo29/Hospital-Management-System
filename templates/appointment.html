@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧑🏼‍⚕️Orchid Clinic - Appointments</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="/static/appointment.css" />
+
+
+</head>
+<body>
+  <section class="appointment-section">
+    <h1>Book an Appointment</h1>
+    <p>Schedule your visit with our healthcare professionals. Please fill out the form below and we’ll confirm your appointment.</p>
+    
+    <div class="container">
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        <p><strong>Phone:</strong> <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+        <p><strong>Email:</strong> <a href="mailto:appointments@orchidclinic.com">appointments@orchidclinic.com</a></p>
+        <p><strong>Address:</strong> <br />123 Medical Center Dr,<br />Healthcare City</p>
+        <p class="availability">Our staff is available Monday-Friday from 8am–7pm and Saturday from 9am–5pm.</p>
+      </div>
+
+      <div class="form-container">
+        <h2>Appointment Request Form</h2>
+        <form>
+          <div class="form-row">
+            <input type="text" placeholder="First Name" required />
+            <input type="text" placeholder="Last Name" required />
+          </div>
+          <div class="form-row">
+            <input type="email" placeholder="Email" required />
+            <input type="tel" placeholder="Phone Number" required />
+          </div>
+          <div class="form-row full-width">
+            <select required>
+              <option value="">Select a doctor</option>
+              <option>Dr.Smith (General Physician)</option>
+              <option>Dr.Johnson (Cardiologist)</option>
+              <option>Dr.Aisha Kapoor (Pediatrician)</option>
+              <option>Dr.John Matthews (Orthopedic Surgeon)</option>
+              <option>Dr.Sarah Liao (Dermatologist)</option>
+              <option>Dr.Ravi Deshmukh (Neurologist)</option>
+              <option>Dr.Laura Kim (Gynecologist)</option>
+              <option>Dr.Anita Bose (Psychiatrist)</option>
+
+
+            </select>
+          </div>
+          <div class="form-row full-width">
+            <input type="date" required />
+          </div>
+          <div class="form-row full-width">
+            <select required>
+              <option value="">Select a time</option>
+              <option>9:00 AM</option>
+              <option>11:00 AM</option>
+              <option>2:00 PM</option>
+              <option>4:00 PM</option>
+              <option>7:00 PM</option>
+            </select>
+          </div>
+          <div class="form-row full-width">
+            <label>
+              <input type="radio" name="type" checked /> New Patient
+            </label>
+            <label>
+              <input type="radio" name="type" /> Follow-up
+            </label>
+            <label>
+              <input type="radio" name="type" /> Urgent Care
+            </label>
+          </div>
+          <div class="form-row full-width">
+            <textarea placeholder="Additional Notes"></textarea>
+          </div>
+          <div class="form-row full-width">
+            <button type="submit">Request Appointment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  
+</body>
+</html>
