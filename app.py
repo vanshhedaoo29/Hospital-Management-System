@@ -6,6 +6,7 @@ from email.mime.text import MIMEText
 import razorpay
 import hmac
 import hashlib
+import os
 
 app = Flask(__name__)
 app.secret_key = 'jevlakay'
@@ -14,95 +15,9 @@ WEBHOOK_SECRET = "jevlakay"  # Same as set in Razorpay dashboard
 
 # Razorpay credentials
 razorpay_client = razorpay.Client(auth=("rzp_test_ssENo9FiYrNaQF", "Ux56gbRZb11oRdKoiASOQW0u"))
+RAZORPAY_APPOINTMENT_AMOUNT = 500
 
 DB_NAME = 'hospital.db'
-
-# Create all necessary tables
-# def init_db():
-#     conn = sqlite3.connect(DB_NAME)
-#     cursor = conn.cursor()
-    
-#     # Users table
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-#         id INTEGER PRIMARY KEY AUTOINCREMENT,
-#         name TEXT NOT NULL,
-#         email TEXT UNIQUE NOT NULL,
-#         password TEXT NOT NULL
-#     )''')
-
-#     # Appointments table
-#     # cursor.execute('''CREATE TABLE IF NOT EXISTS appointments (
-#     #     id INTEGER PRIMARY KEY AUTOINCREMENT,
-#     #     firstname TEXT NOT NULL,
-#     #     lastname TEXT NOT NULL,
-#     #     email TEXT NOT NULL,
-#     #     number TEXT NOT NULL,
-#     #     doctor TEXT NOT NULL,
-#     #     date TEXT NOT NULL,
-#     #     time TEXT NOT NULL,
-#     #     appointment_type TEXT NOT NULL,
-#     #     notes TEXT
-#     # )''')
-    
-#     # Admin table
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS admins (
-#         id INTEGER PRIMARY KEY AUTOINCREMENT,
-#         fullname TEXT NOT NULL,
-#         email TEXT UNIQUE NOT NULL,
-#         password TEXT NOT NULL
-#     )''')
-    
-#     # Insert default admin if none exists
-#     cursor.execute("SELECT * FROM admins")
-#     if cursor.fetchone() is None:
-#         cursor.execute("INSERT INTO admins (email, password) VALUES (?, ?)", (
-#             "admin@example.com", generate_password_hash("admin123")
-#         ))
-        
-#     # Create tables if not exist
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-#         id INTEGER PRIMARY KEY AUTOINCREMENT,
-#         name TEXT NOT NULL,
-#         email TEXT UNIQUE NOT NULL,
-#         password TEXT NOT NULL
-#     )''')
-
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS appointments (
-#         id INTEGER PRIMARY KEY AUTOINCREMENT,
-#         firstname TEXT NOT NULL,
-#         lastname TEXT NOT NULL,
-#         email TEXT NOT NULL,
-#         number TEXT NOT NULL,
-#         doctor TEXT NOT NULL,
-#         date TEXT NOT NULL,
-#         time TEXT NOT NULL,
-#         appointment_type TEXT NOT NULL,
-#         notes TEXT
-#     )''')
-
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS admins (
-#         id INTEGER PRIMARY KEY AUTOINCREMENT,
-#         fullname TEXT NOT NULL,
-#         email TEXT UNIQUE NOT NULL,
-#         password TEXT NOT NULL
-#     )''')
-
-#     # Check if 'status' column already exists
-#     cursor.execute("PRAGMA table_info(appointments)")
-#     columns = [col[1] for col in cursor.fetchall()]
-#     if 'status' not in columns:
-#         cursor.execute("ALTER TABLE appointments ADD COLUMN status TEXT DEFAULT 'Pending'")
-        
-#     # Add 'fullname' column to admins if not exists
-#     cursor.execute("PRAGMA table_info(admins)")
-#     admin_columns = [col[1] for col in cursor.fetchall()]
-#     if 'fullname' not in admin_columns:
-#         cursor.execute("ALTER TABLE admins ADD COLUMN fullname TEXT")    
-
-#     conn.commit()
-#     conn.close()
-
-
 
 
 
@@ -151,6 +66,9 @@ def init_db():
             email TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL
         )''')
+        
+        
+        
 
         # Check if default admin exists
         cursor.execute("SELECT * FROM admins WHERE email=?", ("admin@example.com",))
@@ -391,35 +309,33 @@ def admin_logout():
     return redirect(url_for("admin_login"))
 
 
-def create_payment_link(amount, patient_email):
-    response = razorpay_client.payment_link.create({
-        "amount": amount * 100,  # Razorpay accepts amount in paise
-        "currency": "INR",
-        "accept_partial": False,
-        "description": "Orchid Clinic Appointment Fees",
-        "customer": {
-            "email": patient_email
-        },
-        "notify": {
-            "email": True
-        },
-        "callback_url": "http://yourdomain.com/payment_status",  # Optional
-        "callback_method": "get"
-    })
-    return response['short_url']
+# def create_payment_link(amount, patient_email):
+#     response = razorpay_client.payment_link.create({
+#         "amount": amount * 100,  # Razorpay accepts amount in paise
+#         "currency": "INR",
+#         "accept_partial": False,
+#         "description": "Orchid Clinic Appointment Fees",
+#         "customer": {
+#             "email": patient_email
+#         },
+#         "notify": {
+#             "email": True
+#         },
+#         # "callback_url": "http://yourdomain.com/payment_status",  # Optional
+#         # "callback_method": "get"
+#     })
+#     return response['short_url']
 
-def send_email(to, subject, body):
-    sender = "earliestpath01@gmail.com"
-    password = "bwob fimg tycj kpik"
 
-    msg = MIMEText(body)
-    msg["Subject"] = subject
-    msg["From"] = sender
-    msg["To"] = to
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-        server.login(sender, password)
-        server.sendmail(sender, to, msg.as_string())
+#     msg = MIMEText(body)
+#     msg["Subject"] = subject
+#     msg["From"] = sender
+#     msg["To"] = to
+
+#     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+#         server.login(sender, password)
+#         server.sendmail(sender, to, msg.as_string())
 
 
 
@@ -427,81 +343,131 @@ def send_email(to, subject, body):
 # def update_status(id):
 #     new_status = request.form["status"]
 
-#     # Update the status in the database
 #     conn = sqlite3.connect(DB_NAME)
 #     cursor = conn.cursor()
+
+#     # Update status
 #     cursor.execute("UPDATE appointments SET status=? WHERE id=?", (new_status, id))
 
-#     # Get the user's email address
+#     # Get email for the appointment
 #     cursor.execute("SELECT email FROM appointments WHERE id=?", (id,))
-#     email = cursor.fetchone()[0]
+#     result = cursor.fetchone()
+#     email = result[0] if result else None
 #     conn.commit()
 #     conn.close()
 
-#     # Send email for Approved or Cancelled
-#     if new_status == "Cancelled":
-#         subject = f"Your Appointment has been {new_status}"
+#     # If Approved, send payment link
+#     if new_status == "Approved" and email:
+#         payment_link = create_payment_link(500, email)  # 500 is the appointment fee
+#         subject = "Your Appointment is Approved – Payment Link"
 #         body = f"""Dear Patient,
 
-# Your appointment has been {new_status.lower()}.
+# Your appointment has been approved.
 
-# Regards,  
-# Orchid Clinic"""
-#         send_email(email, subject, body)
-        
-#     if new_status == "Approved":
-#     payment_link = create_payment_link(500, email)  # Change 500 to your actual fee
-#     subject = "Your Appointment is Approved – Payment Required"
-#     body = f"""Dear Patient,
-
-# Your appointment has been approved. Please complete the payment of ₹500 at the link below:
+# Please pay ₹500 using the secure Razorpay link below to confirm your appointment:
 
 # {payment_link}
 
+# Thank you,
+# Orchid Clinic"""
+#         send_email(email, subject, body)
+
+#     # If Cancelled, notify user
+#     elif new_status == "Cancelled" and email:
+#         subject = "Your Appointment is Cancelled"
+#         body = f"""Dear Patient,
+
+# Your appointment has been cancelled.
+
 # Regards,
-# Orchid Clinic
-# """
-#     send_email(email, subject, body)    
+# Orchid Clinic"""
+#         send_email(email, subject, body)
 
 #     flash(f"📧 Appointment status updated to {new_status}", "s-updated")
 #     return redirect(url_for("dashboard"))
 
 
 
+
+
+def create_payment_link(amount, patient_email):
+    try:
+        response = razorpay_client.payment_link.create({
+            "amount": amount * 100,  # in paise
+            "currency": "INR",
+            "accept_partial": False,
+            "description": "Orchid Clinic Appointment Fees",
+            "customer": {
+                "email": patient_email
+            },
+            "notify": {
+                "email": True
+            },
+            "reminder_enable": True
+        })
+        print(f"✅ Created Razorpay link: {response['short_url']}")
+        return response['short_url']
+    except Exception as e:
+        print(f"❌ Error creating Razorpay link: {e}")
+        return None
+
+
+def send_email(to, subject, body):
+    sender = "earliestpath01@gmail.com"
+    password = "bwob fimg tycj kpik"
+    
+    try:
+        msg = MIMEText(body)
+        msg["Subject"] = subject
+        msg["From"] = sender
+        msg["To"] = to
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(sender, password)
+            server.sendmail(sender, to, msg.as_string())
+        print("✅ Email sent successfully.")
+    except Exception as e:
+        print(f"❌ Failed to send email: {e}")
+
+
 @app.route("/update_status/<int:id>", methods=["POST"])
 def update_status(id):
     new_status = request.form["status"]
 
+    # Connect to DB
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
     # Update status
     cursor.execute("UPDATE appointments SET status=? WHERE id=?", (new_status, id))
+    conn.commit()
 
-    # Get email for the appointment
+    # Fetch email of patient
     cursor.execute("SELECT email FROM appointments WHERE id=?", (id,))
     result = cursor.fetchone()
     email = result[0] if result else None
-    conn.commit()
     conn.close()
 
-    # If Approved, send payment link
+    # If approved, send email + Razorpay link
     if new_status == "Approved" and email:
-        payment_link = create_payment_link(500, email)  # 500 is the appointment fee
-        subject = "Your Appointment is Approved – Payment Link"
-        body = f"""Dear Patient,
+        payment_link = create_payment_link(RAZORPAY_APPOINTMENT_AMOUNT, email)
+        if payment_link:
+            subject = "Your Appointment is Approved – Payment Link"
+            body = f"""Dear Patient,
 
 Your appointment has been approved.
 
-Please pay ₹500 using the secure Razorpay link below to confirm your appointment:
+Please pay ₹{RAZORPAY_APPOINTMENT_AMOUNT} using the secure Razorpay link below to confirm your appointment:
 
 {payment_link}
 
 Thank you,
 Orchid Clinic"""
-        send_email(email, subject, body)
+            send_email(email, subject, body)
+        else:
+            print("⚠️ Payment link not created. Skipping email.")
 
-    # If Cancelled, notify user
+    # If cancelled, notify patient
     elif new_status == "Cancelled" and email:
         subject = "Your Appointment is Cancelled"
         body = f"""Dear Patient,
@@ -514,53 +480,6 @@ Orchid Clinic"""
 
     flash(f"📧 Appointment status updated to {new_status}", "s-updated")
     return redirect(url_for("dashboard"))
-
-
-@app.route("/payment_webhook", methods=["POST"]) 
-def payment_webhook():
-    payload = request.data
-    received_signature = request.headers.get('X-Razorpay-Signature')
-
-    generated_signature = hmac.new(
-        bytes(WEBHOOK_SECRET, 'utf-8'),
-        msg=payload,
-        digestmod=hashlib.sha256
-    ).hexdigest()
-
-    if not hmac.compare_digest(received_signature, generated_signature):
-        abort(400)
-
-    data = request.get_json()
-
-    if data['event'] == "payment.link.paid":
-        payment_id = data['payload']['payment_link']['entity']['id']
-        email = data['payload']['payment_link']['entity']['customer']['email']
-
-        # Update DB
-        conn = sqlite3.connect(DB_NAME)
-        cursor = conn.cursor()
-        cursor.execute("UPDATE appointments SET payment_status='Paid' WHERE email=?", (email,))
-        conn.commit()
-        conn.close()
-
-        print(f"✅ Payment received for {email}, Payment ID: {payment_id}")
-
-    return "", 200
-
-
-@app.route("/dashboard/payment_logs")
-def payment_logs():
-    if "admin_logged_in" not in session:
-        flash("❌ Please log in as admin", "danger")
-        return redirect(url_for("admin_login"))
-
-    conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
-    cursor.execute("SELECT id, name, email, status, payment_status FROM appointments WHERE payment_status='Paid'")
-    paid_appointments = cursor.fetchall()
-    conn.close()
-
-    return render_template("payment_logs.html", appointments=paid_appointments)
 
 
 

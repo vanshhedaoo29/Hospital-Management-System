@@ -269,3 +269,165 @@
 #             db.session.add_all(doctors)
 #             db.session.commit()
 #     app.run(debug=True)  # 🚀 Launch our rocket server!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Create all necessary tables
+# def init_db():
+#     conn = sqlite3.connect(DB_NAME)
+#     cursor = conn.cursor()
+    
+#     # Users table
+#     cursor.execute('''CREATE TABLE IF NOT EXISTS users (
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         name TEXT NOT NULL,
+#         email TEXT UNIQUE NOT NULL,
+#         password TEXT NOT NULL
+#     )''')
+
+#     # Appointments table
+#     # cursor.execute('''CREATE TABLE IF NOT EXISTS appointments (
+#     #     id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     #     firstname TEXT NOT NULL,
+#     #     lastname TEXT NOT NULL,
+#     #     email TEXT NOT NULL,
+#     #     number TEXT NOT NULL,
+#     #     doctor TEXT NOT NULL,
+#     #     date TEXT NOT NULL,
+#     #     time TEXT NOT NULL,
+#     #     appointment_type TEXT NOT NULL,
+#     #     notes TEXT
+#     # )''')
+    
+#     # Admin table
+#     cursor.execute('''CREATE TABLE IF NOT EXISTS admins (
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         fullname TEXT NOT NULL,
+#         email TEXT UNIQUE NOT NULL,
+#         password TEXT NOT NULL
+#     )''')
+    
+#     # Insert default admin if none exists
+#     cursor.execute("SELECT * FROM admins")
+#     if cursor.fetchone() is None:
+#         cursor.execute("INSERT INTO admins (email, password) VALUES (?, ?)", (
+#             "admin@example.com", generate_password_hash("admin123")
+#         ))
+        
+#     # Create tables if not exist
+#     cursor.execute('''CREATE TABLE IF NOT EXISTS users (
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         name TEXT NOT NULL,
+#         email TEXT UNIQUE NOT NULL,
+#         password TEXT NOT NULL
+#     )''')
+
+#     cursor.execute('''CREATE TABLE IF NOT EXISTS appointments (
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         firstname TEXT NOT NULL,
+#         lastname TEXT NOT NULL,
+#         email TEXT NOT NULL,
+#         number TEXT NOT NULL,
+#         doctor TEXT NOT NULL,
+#         date TEXT NOT NULL,
+#         time TEXT NOT NULL,
+#         appointment_type TEXT NOT NULL,
+#         notes TEXT
+#     )''')
+
+#     cursor.execute('''CREATE TABLE IF NOT EXISTS admins (
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         fullname TEXT NOT NULL,
+#         email TEXT UNIQUE NOT NULL,
+#         password TEXT NOT NULL
+#     )''')
+
+#     # Check if 'status' column already exists
+#     cursor.execute("PRAGMA table_info(appointments)")
+#     columns = [col[1] for col in cursor.fetchall()]
+#     if 'status' not in columns:
+#         cursor.execute("ALTER TABLE appointments ADD COLUMN status TEXT DEFAULT 'Pending'")
+        
+#     # Add 'fullname' column to admins if not exists
+#     cursor.execute("PRAGMA table_info(admins)")
+#     admin_columns = [col[1] for col in cursor.fetchall()]
+#     if 'fullname' not in admin_columns:
+#         cursor.execute("ALTER TABLE admins ADD COLUMN fullname TEXT")    
+
+#     conn.commit()
+#     conn.close()
+
+
+
+
+
+
+
+
+
+
+
+# @app.route("/update_status/<int:id>", methods=["POST"])
+# def update_status(id):
+#     new_status = request.form["status"]
+
+#     # Update the status in the database
+#     conn = sqlite3.connect(DB_NAME)
+#     cursor = conn.cursor()
+#     cursor.execute("UPDATE appointments SET status=? WHERE id=?", (new_status, id))
+
+#     # Get the user's email address
+#     cursor.execute("SELECT email FROM appointments WHERE id=?", (id,))
+#     email = cursor.fetchone()[0]
+#     conn.commit()
+#     conn.close()
+
+#     # Send email for Approved or Cancelled
+#     if new_status == "Cancelled":
+#         subject = f"Your Appointment has been {new_status}"
+#         body = f"""Dear Patient,
+
+# Your appointment has been {new_status.lower()}.
+
+# Regards,  
+# Orchid Clinic"""
+#         send_email(email, subject, body)
+        
+#     if new_status == "Approved":
+#     payment_link = create_payment_link(500, email)  # Change 500 to your actual fee
+#     subject = "Your Appointment is Approved – Payment Required"
+#     body = f"""Dear Patient,
+
+# Your appointment has been approved. Please complete the payment of ₹500 at the link below:
+
+# {payment_link}
+
+# Regards,
+# Orchid Clinic
+# """
+#     send_email(email, subject, body)    
+
+#     flash(f"📧 Appointment status updated to {new_status}", "s-updated")
+#     return redirect(url_for("dashboard"))
