@@ -435,6 +435,7 @@ def update_status(id):
         body = f"""Dear Patient,
 
 Your appointment has been {new_status.lower()}.
+Appointment payment link: http://bit.ly/450QNPY
 
 Regards,  
 Orchid Clinic"""
