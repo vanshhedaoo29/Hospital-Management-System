@@ -5,6 +5,8 @@ virtualenv env
 .\env\Scripts\activate.ps1
 
 pip install flask
+pip freeze > requirements.txt
+pip install gunicorn
 
 pip install render_template
 
