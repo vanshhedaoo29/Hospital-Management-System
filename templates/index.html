@@ -14,97 +14,85 @@
       rel="stylesheet"
     />
     <style>
-        /* Hamburger Styles */
-        .hamburger {
+        
+        .popup {
           display: none;
-          flex-direction: column;
-          cursor: pointer;
-        }
-        .hamburger span {
-          height: 3px;
-          width: 25px;
-          background: #333;
-          margin: 4px 0;
-          transition: 0.3s;
+          position: fixed;
+          top: 120px;
+          right: 20px;
+          padding: 15px 25px;
+          border-radius: 5px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          z-index: 9999;
+          font-weight: bold;
+          animation: fadein 0.5s;
+          border: 1px solid #333;
         }
         
-        @media (max-width: 768px) {
-          .nav-links {
-            position: absolute;
-            right: 0;
-            top: 70px;
-            background-color: #fff;
-            height: auto;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            display: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-          }
-          .nav-links.active {
-            display: flex;
-          }
-          .hamburger {
-            display: flex;
-          }
+        .popup.success {
+          background-color: #ffffff;
+          color: black;
         }
-    
-        /* Dark Mode Styles */
-        body.dark-mode {
-          background-color: #1a1a1a;
-          color: #eee;
+
+        .popup.appointment{
+          background-color: #ffffff;
+          color: black;
         }
-        body.dark-mode nav,
-        body.dark-mode .grid-items,
-        body.dark-mode .grid-items2,
-        body.dark-mode footer {
-          background-color: #2c2c2c;
+        
+        
+        @keyframes fadein {
+          from { opacity: 0; top: 60px; }
+          to { opacity: 1; top: 120px; }
         }
-        body.dark-mode .nav-links a,
-        body.dark-mode footer p,
-        body.dark-mode footer a,
-        body.dark-mode footer li {
-          color: #fff;
-        }
-    
-        /* Footer Responsive */
-        footer .divide {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          gap: 20px;
-        }
-        @media (max-width: 768px) {
-          footer .divide > div {
-            flex: 1 1 100%;
-            text-align: center;
-          }
-        }
+        
       </style>
   </head>
+
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-        <h1>Orchid <span>Clinic</span></h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="popup {{ category }}">
+          {{ message }}
         </div>
-        <ul class="nav-links">
-          <li><a href=" http://127.0.0.1:6969/aboutus ">About</a></li>
-          <li><a href=" http://127.0.0.1:6969/doctors ">Doctors</a></li>
-          <li><a href=" http://127.0.0.1:6969/appointments ">Appointments</a></li>
+      {% endfor %}
+      <script>
+        const popups = document.querySelectorAll('.popup');
+        popups.forEach(popup => {
+          popup.style.display = "block";
+          setTimeout(() => {
+            popup.style.display = "none";
+          }, 3000);
+        });
+      </script>
+    {% endif %}
+  {% endwith %}
+
+  <header>
+    <nav>
+      <div class="logo">
+      <h1>Orchid <span>Clinic</span></h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href=" http://127.0.0.1:4518/home ">Home</a></li>
+        <li><a href=" http://127.0.0.1:4518/aboutus ">About</a></li>
+        <li><a href=" http://127.0.0.1:4518/doctors ">Doctors</a></li>
+        <li><a href=" http://127.0.0.1:4518/appointments ">Appointments</a></li>
+        <li><a href=" http://127.0.0.1:4518/contact ">Contact Us</a></li>
+      </ul>
+      
+      <div class="btn">
+        <i id="login" class='bx bx-user bx-flashing' ></i>
+        <ul>
+          <li><a href=" http://127.0.0.1:4518/login " id="login-btn">Log In</a></li>
+          <li><a href=" http://127.0.0.1:4518/logout " id="logout-btn">Logout</a></li>
         </ul>
-        
-        <div class="btn">
-          <i class='bx bx-user bx-flashing' ></i>
-          <ul>
-            <li><a href=" http://127.0.0.1:6969/login " id="login-btn">Log In</a></li>
-          </ul>
-          
-        </div>
-        
-    
-      </nav>
-    </header>
+        <i id="logout" class='bx bx-log-out bx-flashing' ></i>
+      </div>
+      
+  
+    </nav>
+  </header>
 
     <main>
       <section class="hero">
@@ -114,8 +102,8 @@
             Providing compassionate and comprehensive healthcare with state of
             the art facilities and experienced professionals.
           </p>
-          <a class="appointment-btn" href=" http://127.0.0.1:6969/appointments ">Book an Appointment</a> 
-          <a href=" http://127.0.0.1:6969/doctors " class="doctors-btn">Our Doctors</a>
+          <a class="appointment-btn" href=" http://127.0.0.1:4518/appointments ">Book an Appointment</a> 
+          <a href=" http://127.0.0.1:4518/doctors " class="doctors-btn">Our Doctors</a>
         </div>
         <div class="hero-image">
           <img
@@ -259,7 +247,7 @@
               and take the first step
             </p>
             <p class="p2">towards better health.</p>
-            <a href=" http://127.0.0.1:6969/appointments ">Book an Appointment</a>
+            <a href=" http://127.0.0.1:4518/appointments ">Book an Appointment</a>
           </div>
         </div>
       </section>
@@ -278,10 +266,11 @@
               </div>
               <div class="col2">
                 <h4>Quick Links</h4>
-                <li><a href="/static/index.html">Home</a></li>
-                <li><a href="/static/aboutus.html">About Us</a></li>
-                <li><a href="/static/doctor.html">Our Doctors</a></li>
-                <li><a href="/static/appointment.html">Book Appointment</a></li>
+                <li><a href="http://127.0.0.1:4518/home ">Home</a></li>
+                <li><a href="http://127.0.0.1:4518/aboutus">About Us</a></li>
+                <li><a href="http://127.0.0.1:4518/doctors">Our Doctors</a></li>
+                <li><a href=" http://127.0.0.1:4518/appointments">Book Appointment</a></li>
+                <li><a href=" http://127.0.0.1:4518/contact">Contact Us</a></li>
               </div>
               <div class="col3">
                 <h4>Services</h4>

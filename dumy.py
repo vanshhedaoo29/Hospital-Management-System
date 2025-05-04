@@ -1,3 +1,176 @@
+# from flask import Flask, flash, render_template, request, redirect, url_for, session
+# from datetime import timedelta
+
+# app = Flask(__name__)
+# app.secret_key= "data"
+# app.permanent_session_lifetime = timedelta(hours=5)
+
+# @app.route("/")
+# def home():
+#     return render_template('index.html')
+
+# # Login Route
+# @app.route('/login', methods=["POST","GET"])
+# def login():
+#     if request.method == "POST":
+#         session.permanent = True
+        
+#         return redirect(url_for("home"))
+#     else:
+        
+#         return redirect(url_for("home"))
+    
+#     return render_template('login.html')
+
+
+# @app.route('/logout')
+# def logout():
+#     session.pop("user", None)
+#     flash("You have been Logged Out !")
+#     return redirect(url_for("login"))
+
+# # Signup Route
+# @app.route('/signup')
+# def signup():
+#     return render_template('signup.html')
+
+# @app.route("/admin")
+# def admin():
+#     return redirect(url_for('home'))
+
+# @app.route("/admin-login")
+# def admin_login():
+#     return render_template('admin-login.html')
+
+# @app.route("/admin-signup")
+# def admin_signup():
+#     return render_template('admin-signup.html')
+
+
+# @app.route("/appointments")
+# def appointments():
+#     return render_template('appointment.html')
+
+# @app.route("/doctors")
+# def doctors():
+#     return render_template('doctor.html')
+
+# @app.route("/aboutus")
+# def about_us():
+#     return render_template('aboutus.html')
+
+
+# # Step 5: Run Server and Create DB
+# if __name__ == "__main__":
+   
+#     app.run(debug=True, port=4518)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from flask import Flask, render_template, request, redirect, url_for
+# from flask_sqlalchemy import SQLAlchemy
+# from datetime import datetime
+
+
+
+# app = Flask(__name__)
+
+# # Step 1: Database Configuration
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hospital.db'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# # Step 2: Initialize SQLAlchemy
+# db = SQLAlchemy(app)
+
+# # Step 4: Define Routes
+# @app.route("/")
+# def hello_world():
+#     return render_template('index.html')
+
+# @app.route("/appointments")
+# def appointments():
+#     return render_template('appointment.html')
+
+# @app.route("/doctors")
+# def doctors():
+#     return render_template('doctor.html')
+
+# @app.route("/aboutus")
+# def about_us():
+#     return render_template('aboutus.html')
+
+# # Login Route
+# @app.route('/login')
+# def login():
+#     return render_template('patient.html')
+
+# # Signup Route
+# @app.route('/signup')
+# def signup():
+#     return render_template('patient-register.html')
+
+
+# @app.route("/admin-login")
+# def admin_login():
+#     return render_template('admin.html')
+
+# @app.route("/admin-signup")
+# def admin_signup():
+#     return render_template('admin-register.html')
+
+# # Step 5: Run Server and Create DB
+# if __name__ == "__main__":
+   
+#     app.run(debug=True, port=6969)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # # 🧙‍♂️ Magic Hospital Server Code (app.py)
 # from flask import Flask, render_template, request, redirect, url_for
 # from flask_sqlalchemy import SQLAlchemy

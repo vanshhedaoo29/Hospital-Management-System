@@ -6,13 +6,19 @@
   }
   
   body {
-    background-color: #f3f4f6;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-color: var(--third);
   }
   
+  :root {
+    --main: #9b87f5;
+    --sec: #1a1f2c;
+    --third: #f5f2ff;
+  }
+
   .container {
     text-align: center;
     width: 100%;
@@ -88,8 +94,14 @@
   }
   
   .btn.dark {
-    background-color: #111827;
+    background-color: #a78bfa;
     color: white;
+  }
+
+  .btn.dark:hover{
+    background-color: rgba(167, 139, 250, 0.8);
+    color: var(--sec);
+    transition: 0.3s all ease-in-out;
   }
   
   .register-link {

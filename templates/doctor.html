@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧑🏼‍⚕️Orchid Clinic - Doctors</title>
+    <title>Orchid Clinic - Doctors</title>
     <link rel="stylesheet" href="/static/doctor.css">
+    <link rel="stylesheet" href="/static/style.css">
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
     rel="stylesheet"
@@ -17,21 +18,32 @@
 </head>
 
 <body>
-
-    <header>
-        <nav>
-          <div class="logo">
-            <a href="/Frontend/HTML/index.html"><h1>Orchid <span>Clinic</span></h1></a>
-          </div>
-          <ul class="nav-links">
-            <li><a href="#">About</a></li>
-            <li><a href="/Frontend/HTML/doctor.html">Doctors</a></li>
-            <li><a href="#">Appointments</a></li>
-            <li><a href="patient.html" class="login-btn">Log In</a></li>
-          </ul>
-        </nav>
-      </header>
-
+  <header>
+    <nav>
+      <div class="logo">
+      <h1>Orchid <span>Clinic</span></h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href=" http://127.0.0.1:4518/home ">Home</a></li>
+        <li><a href=" http://127.0.0.1:4518/aboutus ">About</a></li>
+        <li><a href=" http://127.0.0.1:4518/doctors ">Doctors</a></li>
+        <li><a href=" http://127.0.0.1:4518/appointments ">Appointments</a></li>
+        <li><a href=" http://127.0.0.1:4518/contact ">Contact Us</a></li>
+      </ul>
+      
+      <div class="btn">
+        <i id="login" class='bx bx-user bx-flashing' ></i>
+        <ul>
+          <li><a href=" http://127.0.0.1:4518/login " id="login-btn">Log In</a></li>
+          <li><a href=" http://127.0.0.1:4518/logout " id="logout-btn">Logout</a></li>
+        </ul>
+        <i id="logout" class='bx bx-log-out bx-flashing' ></i>
+      </div>
+      
+  
+    </nav>
+  </header>
+    
 
       <div class="content">
         <div class="text">
@@ -42,7 +54,8 @@
     </div>
 
     <div class="contain">
-      <input type="text" class="search-box" placeholder="Search by name or speciality..."></input>
+      <i class="ri-search-line"></i>
+      <input  type="text" class="search-box" placeholder="Search by name or speciality..."   ></input>
      <select id="specialty-filter">
   <option value="All">All Specialties</option>
 
@@ -74,12 +87,12 @@
        
 
           <div class="box"  data-name="Dr.Neha Mehta" data-specialty="Gynecology">
-            <div class="name" >
-                <h1>NM</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/neha mehta.png" alt="">
+          </div>
             <div class="info">
-                <h4>Dr.Neha Mehta</h4>
-                <h6>👩‍⚕️Gynecology</h6>
+                <h3>Dr.Neha Mehta</h3>
+                <h5>👩‍⚕Gynecology</h5>
                 <p>Senior Consultant, Obstetrics & Gynecology
                   Apollo Hospitals, Chennai
                   </p>
@@ -91,13 +104,13 @@
             </div>
           </div>
           
-          <div class="box"  data-name="Dr.Anjali kumar" data-specialty="Gynecology">
-            <div class="name" >
-                <h1>AK</h1>
+          <!--<div class="box"  data-name="Dr.Anjali kumar" data-specialty="Gynecology">
+            <div id="photo" >
+                <img class="ph2" src="/docter photo/dr-anjali-kumar.png" alt="">
             </div>
             <div class="info">
-                <h4>Dr.Anjali kumar</h4>
-                <h6>👩‍⚕️Gynecology</h6>
+                <h3>Dr.Anjali kumar</h3>
+                <h5>👩‍⚕Gynecology</h5>
                 <p>Senior Consultant, Obstetrics & Gynecology
                   Manipal Hospitals, Delhi
                   </p>
@@ -107,18 +120,19 @@
                 </div>
 
             </div>
-          </div>
+          </div>-->
         
           <div class="box"  data-name="Dr. Vishal Saxena" data-specialty="Nephrology">
-            <div class="name" >
-                <h1>VS</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/Vishal_saxnena.jpg" alt="">
+          </div>
+            
             <div class="info">
-                <h4>Dr. Vishal Saxena</h4>
-                <h6>🩺Nephrology</h6>
+                <h3>Dr. Vishal Saxena</h3>
+                <h5>🩺Nephrology</h5>
                 <p>Senior Consultant Nephrologist
                   Indraprastha Apollo Hospital, Delhi
-                  </p>
+                </p>
                 <div class="last">
                     <p>Experience: 15 years</p>
                     <button>View Profile</button>
@@ -126,14 +140,14 @@
 
             </div>
           </div>
-          <div class="box"  data-name="Dr. Jayant Kumar Hota" data-specialty="Nephrology">
-            <div class="name" >
-                <h1>JH</h1>
-            </div>
+         <!--<div class="box"  data-name="Dr. Jayant Kumar Hota" data-specialty="Nephrology">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/Dr.-Jayant-Kumar-Hota.jpg" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Jayant Kumar Hota
-                </h4>
-                <h6>🩺Nephrology</h6>
+                <h3>Dr. Jayant Kumar Hota
+                </h3>
+                <h5>🩺Nephrology</h5>
                 <p>Senior Consultant Nephrologist
                   Apollo Hospitals, Delhi
                   
@@ -144,17 +158,17 @@
                 </div>
 
             </div>
-          </div>
+          </div>-->
 
           
 
           <div class="box"  data-name="Dr. Mukul Verma" data-specialty="Neurology">
-            <div class="name" >
-                <h1>MV</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/dr-mukul-varma-neurology.png" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Mukul Verma
-                <h6>🧠Neurology</h6>
+                <h3>Dr. Mukul Verma</h3>
+                <h5>🧠Neurology</h5>
                 <p>Senior Consultant Neurologist
                   Max Healthcare, Delhi
                   </p>
@@ -166,15 +180,14 @@
             </div>
           </div>
 
-
-          <div class="box"  data-name="Dr. Vinit Suri" data-specialty="Neurology">
-            <div class="name" >
-                <h1>VS</h1>
-            </div>
+         <!-- <div class="box"  data-name="Dr. Vinit Suri" data-specialty="Neurology">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/dr-vinit-suri-neurology-in-delhi.png" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Vinit Suri
-                </h4>
-                <h6>🧠Neurology</h6>
+                <h3>Dr. Vinit Suri
+                </h3>
+                <h5>🧠Neurology</h5>
                 <p> Senior Consultant Neurologist
                   Apollo Hospitals, Delhi
                   
@@ -185,16 +198,16 @@
                 </div>
 
             </div>
-          </div>
+          </div>-->
 
           <div class="box"  data-name="Dr. Ambuj Roy" data-specialty="Cardiology">
-            <div class="name" >
-                <h1>AR</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/dr roy cardiology.png" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Ambuj Roy
-                </h4>
-                <h6>❤️Cardiology</h6>
+                <h3>Dr. Ambuj Roy
+                </h3>
+                <h5>❤️ Cardiology</h5>
                 Professor of Cardiology
                 AIIMS, New Delhi                  
                   </p>
@@ -206,17 +219,17 @@
             </div>
           </div>
 
-          <div class="box"  data-name="Dr. Ashok Seth" data-specialty="Cardiology">
-            <div class="name" >
-                <h1>AS</h1>
-            </div>
+         <!-- <div class="box"  data-name="Dr. Ashok Seth" data-specialty="Cardiology">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/Ashok seth.jpg" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Ashok Seth
-                </h4>
-                <h6>❤️ Cardiology</h6>
+                <h3>Dr. Ashok Seth
+                </h3>
+                <h5>❤ Cardiology</h5>
                 <p>Chairman, Fortis Escorts Heart Institute
                 New Delhi
-                
+              3
                   </p>
                 <div class="last">
                     <p>Experience: 15 years</p>
@@ -224,18 +237,17 @@
                 </div>
 
             </div>
-          </div>
+          </div>-->
          
           <div class="box"  data-name="Dr. Anju Singh" data-specialty="Pediatrics">
-            <div class="name" >
-                <h1>AS</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/dr.anju sigh.jpg" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Anju Singh
-                </h4>
-                <h6>​
-
-                  🧒 Pediatrics</h6>
+                <h3>Dr. Anju Singh
+                </h3>
+                <h5>​
+                  🧒 Pediatrics</h5>
                 <p>Consultant Pediatric Rheumatologist
                   AIIMS, Delhi
                   </p>
@@ -247,20 +259,16 @@
             </div>
           </div>
 
-          <div class="box"  data-name="Dr. Sufla Saxena" data-specialty="Pediatrics">
-            <div class="name" >
-                <h1>SS</h1>
-            </div>
+         <!--<div class="box"  data-name="Dr. Sufla Saxena" data-specialty="Pediatrics">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/sufla saxena.jpg" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Sufla Saxena
-                <h6>​
-
-                  🧒 Pediatrics</h6>
+                <h3>Dr. Sufla Saxena</h3>
+                <h5>​
+                  🧒 Pediatrics</h5>
                 <p>HOD and Consultant - Pediatric Gastroenterology and Hepatology
                   Manipal Hospital, Dwarka, Delhi NCR
-                  ​
-                  
-                  
                   </p>
                 <div class="last">
                     <p>Experience: 15 years</p>
@@ -268,16 +276,16 @@
                 </div>
 
             </div>
-          </div>
-          <div class="box"  data-name="Dr. Narender Kumar Magu" data-specialty="Orthopedics">
-            <div class="name" >
-                <h1>NM</h1>
-            </div>
-            <div class="info">
-                <h4>Dr. Narender Kumar Magu
-                <h6>​
+          </div>-->
 
-                  🦴 Orthopedics</h6>
+          <div class="box"  data-name="Dr. Narender Kumar Magu" data-specialty="Orthopedics">
+            <div id="photo" >
+              <img class="ph2" src="/static/images/narendra kumar magu.jpg" alt="">
+          </div>
+            <div class="info">
+                <h3>Dr. Narender Kumar Magu</h3>
+                <h5>​
+                  🦴 Orthopedics</h5>
                 <p>Senior Consultant Orthopedic Surgeon
                   PGIMS, Rohtak
                   </p>
@@ -289,15 +297,14 @@
             </div>
           </div>
 
-          <div class="box"  data-name="Dr. Jayant Arora" data-specialty="Orthopedics">
-            <div class="name" >
-                <h1>JA</h1>
-            </div>
+         <!-- <div class="box"  data-name="Dr. Jayant Arora" data-specialty="Orthopedics">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/jayant Arora.jpg" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Jayant Arora
-                <h6>​
-
-                  🦴 Orthopedics</h6>
+                <h3>Dr. Jayant Arora</h3>
+                <h5>​
+                  🦴 Orthopedics</h5>
                 <p>Chief Surgeon, Orthopedics
                   Columbia Asia Hospital, Gurgaon
                   </p>
@@ -307,17 +314,16 @@
                 </div>
 
             </div>
-          </div>
+          </div>-->
 
           <div class="box"  data-name="Dr. Rinky Kapoor" data-specialty="Dermatology">
-            <div class="name" >
-                <h1>RK</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/_Rinky_Kapoor orthopedic.jpg" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Rinky Kapoor
-                <h6>​
-
-                 🧴 Dermatology</h6>
+                <h3>Dr. Rinky Kapoor</h3>
+                <h5>​
+                 🧴 Dermatology</h5>
                 <p>Consultant Dermatologist
                   The Esthetic Clinics, Mumbai
                   </p>
@@ -329,17 +335,16 @@
             </div>
           </div>
 
-          <div class="box"  data-name="Dr. Rashmi Shetty" data-specialty="Dermatology">
-            <div class="name" >
-                <h1>RK</h1>
-            </div>
+        <!-- <div class="box"  data-name="Dr. Rashmi Shetty" data-specialty="Dermatology">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/Rashmi-Shetty dermatology.webp" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Rashmi Shetty</h4>
+                <h3>Dr. Rashmi Shetty</h3>
 
-                 <h6>🧴 Dermatology</h6>
+                 <h5>🧴 Dermatology</h5>
                 <p>Consultant Dermatologist
-                  Mumbai
-                  ​
+                  Mumbai 3
                   </p>
                 <div class="last">
                     <p>Experience: 15 years</p>
@@ -347,16 +352,16 @@
                 </div>
 
             </div>
-          </div>
+          </div>-->
 
           <div class="box"  data-name="Dr. Monica Bambroo" data-specialty="General Medicine">
-            <div class="name" >
-                <h1>MB</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/monica bambroo.jpg" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. Monica Bambroo</h4>
+                <h3>Dr. Monica Bambroo</h3>
 
-                🩺 General Medicine</h6>
+               <h5> 🩺 General Medicine</h5>
                 <p>*Senior
  ​
                   </p>
@@ -368,17 +373,16 @@
             </div>
           </div>
 
-          <div class="box"  data-name="Dr. S. K. Bose" data-specialty="General Medicine">
-            <div class="name" >
-                <h1>SB</h1>
-            </div>
+         <!-- <div class="box"  data-name="Dr. S. K. Bose" data-specialty="General Medicine">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/soumya kanti bose.webp" alt="">
+          </div>
             <div class="info">
-                <h4>Dr. S. K. Bose</h4>
+                <h3>Dr. S. K. Bose</h3>
 
-                🩺 General Medicine</h6>
+               <h5> 🩺 General Medicine</h5>
                 <p>Senior Consultant, Internal Medicine
-                  Venkateshwar Hospital, Delhi
-                  ​
+                  Venkateshwar Hospital, Delhi​
                   </p>
                 <div class="last">
                     <p>Experience: 15 years</p>
@@ -386,16 +390,16 @@
                 </div>
 
             </div>
-          </div>
+          </div>-->
 
           <div class="box"  data-name=" Dr. Raghunandan Prasad" data-specialty="Radiology">
-            <div class="name" >
-                <h1>RP</h1>
-            </div>
+            <div id="photo" >
+              <img class="ph2" src="/static/images/raghunandan.jpg" alt="">
+          </div>
             <div class="info">
-                <h4> Dr. Raghunandan Prasad</h4>
+                <h3> Dr. Raghunandan Prasad</h3>
 
-                🔬 Radiology</h6>
+               <h5> 🔬 Radiology</h5>
                 <p>Senior Consultant Interventional Radiologist and Head of Department
                   ​
                   </p>
@@ -407,17 +411,16 @@
             </div>
           </div>
 
-          <div class="box"  data-name=" Dr. U Rajesh" data-specialty="Radiology">
-            <div class="name" >
-                <h1>SB</h1>
-            </div>
+         <!-- <div class="box"  data-name=" Dr. U Rajesh" data-specialty="Radiology">
+            <div id="photo" >
+              <img class="ph2" src="/docter photo/dr-rajesh-bhat-u.png" alt="">
+          </div>
             <div class="info">
-                <h4> Dr. U Rajesh</h4>
+                <h3> Dr. U Rajesh</h3>
 
-                🔬 Radiology</h6>
+               <h5>🔬 Radiology</h5>
                 <p>Senior Consultant Radiologist
                   Venkateshwar Hospital, Delhi
-                  ​
                   </p>
                 <div class="last">
                     <p>Experience: 15 years</p>
@@ -425,74 +428,75 @@
                 </div>
 
             </div>
-          </div>
+          </div> -->
 
 
 
 
     </div>
 <hr>
+<footer>
+  <div class="foot1">
 
-
-    <footer>
-        <div class="foot1">
-  
-          <div class="divide">
-              <div class="col1">
-                  <h3><span>Orchid</span> Clinic</h3>
-                  <p>
-                    Providing quality healthcare services <br>with a personal touch since
-                    2005.
-                  </p>
-                </div>
-                <div class="col2">
-                  <h4>Quick Links</h4>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Our Doctors</a></li>
-                  <li><a href="#">Book Appointment</a></li>
-                </div>
-                <div class="col3">
-                  <h4>Services</h4>
-                  <li>General Checkup</li>
-                  <li>Specialist Consultation</li>
-                  <li>Pediatric Care</li>
-                  <li>Emergency Services</li>
-                  <li>Laboritory Tests</li>
-                </div>
-                <div class="col4">
-                  <h4>Contact Us</h4>
-                  <div class="loca">
-                    <div class="icon3"><i class="ri-map-pin-line"></i></div>
-                  <p>123 Medical Center Dr, Healthcare City</p>
-                  </div>
-                  <div class="call">
-                    <div class="icon3"><i class="ri-phone-line"></i></div>
-                  <p>+1 (555) 123-4567</p>
-                  </div>
-                  <div class="mail">
-                    <div class="icon3"><i class="ri-mail-line"></i></div>
-                    <p>info@orchidclinic.com</p>
-                  </div>
-                  <div class="time">
-                    <div class="icon3"><i class="ri-time-line"></i></div>
-                    <p>Mon-Fri: 8am-7pm, Sat: 9am-5pm</p>
-                  </div>
-                  
-                </div>
+    <div class="divide">
+        <div class="col1">
+            <h3><span>Orchid</span> Clinic</h3>
+            <p>
+              Providing quality healthcare services <br>with a personal touch since
+              2005.
+            </p>
           </div>
-          
-          
+          <div class="col2">
+            <h4>Quick Links</h4>
+            <li><a href="http://127.0.0.1:4518/home ">Home</a></li>
+            <li><a href="http://127.0.0.1:4518/aboutus">About Us</a></li>
+            <li><a href="http://127.0.0.1:4518/doctors">Our Doctors</a></li>
+            <li><a href=" http://127.0.0.1:4518/appointments">Book Appointment</a></li>
+            <li><a href=" http://127.0.0.1:4518/contact">Contact Us</a></li>
+          </div>
+          <div class="col3">
+            <h4>Services</h4>
+            <li>General Checkup</li>
+            <li>Specialist Consultation</li>
+            <li>Pediatric Care</li>
+            <li>Emergency Services</li>
+            <li>Laboritory Tests</li>
+          </div>
+          <div class="col4">
+            <h4>Contact Us</h4>
+            <div class="loca">
+              <div class="icon3"><i class="ri-map-pin-line"></i></div>
+            <p>123 Medical Center Dr, Healthcare City</p>
+            </div>
+            <div class="call">
+              <div class="icon3"><i class="ri-phone-line"></i></div>
+            <p>+1 (555) 123-4567</p>
+            </div>
+            <div class="mail">
+              <div class="icon3"><i class="ri-mail-line"></i></div>
+              <p>info@orchidclinic.com</p>
+            </div>
+            <div class="time">
+              <div class="icon3"><i class="ri-time-line"></i></div>
+              <p>Mon-Fri: 8am-7pm, Sat: 9am-5pm</p>
+            </div>
+            
+          </div>
+    </div>
+    
+    
+
+  </div>
+
+  <hr>
   
-        </div>
-  
-        <hr>
-        
-  
-        <div class="foot2">
-          <p>© 2025 Orchid Clinic. All rights reserved.</p>
-        </div>
-      </footer>
+
+  <div class="foot2">
+    <p>© 2025 Orchid Clinic. All rights reserved.</p>
+  </div>
+</footer>
+
+   
 
       <script>
         const searchBox = document.querySelector(".search-box");

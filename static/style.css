@@ -67,34 +67,61 @@ nav {
     display: flex;
     align-items: center;
     gap: 5px;
-    background-color: var(--main);
-    padding: 8px 10px;
-    border-radius: 10px;
+    
 }
 
-.btn:hover{
-    background-color: #ab9af7ef;
-    color: var(--sec);
-    transition: 0.2s all ease-in;
+.btn #login-btn{
+  background-color: var(--main);
+  padding: 7px 16px;
+  border-radius: 6px;
+  padding-left: 2rem;
 }
 
-.btn i{
+.btn #logout-btn{
+  background-color: var(--main);
+  padding: 7px 16px;
+  border-radius: 6px;
+  padding-left: 2rem;
+}
+
+
+
+.btn #login{
+  position: absolute;
     font-size: 1.1rem;
-    color: #fff;
+    color: #ffffff;
+    right: 225px;
+    
+}
+
+.btn #logout{
+  position: absolute;
+    font-size: 1.3rem;
+    color: #ffffff;
+    right: 115px;;
 }
 
 
 
 .btn ul{
     list-style-type: none;
+    display: flex;
+    margin: 0;
+  padding: 0;
+}
+
+.btn ul li {
+  margin: 0 8px; /* Adds spacing between Log In and Logout */
 }
 
 .btn ul li a{
     text-decoration: none;
     font-size: 1.1rem;
-    color: #fff;
+    color: #ffffff;
     cursor: pointer;
 }
+
+
 
 
 /* Hero Section */
@@ -523,4 +550,88 @@ footer hr {
   margin: 0rem 10rem auto; /* Center it */
   border: none;
   border-top: 1px solid #ccc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hamburger Styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #333;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    background-color: #fff;
+    height: auto;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #eee;
+}
+body.dark-mode nav,
+body.dark-mode .grid-items,
+body.dark-mode .grid-items2,
+body.dark-mode footer {
+  background-color: #2c2c2c;
+}
+body.dark-mode .nav-links a,
+body.dark-mode footer p,
+body.dark-mode footer a,
+body.dark-mode footer li {
+  color: #fff;
+}
+
+/* Footer Responsive */
+footer .divide {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  footer .divide > div {
+    flex: 1 1 100%;
+    text-align: center;
+  }
 }

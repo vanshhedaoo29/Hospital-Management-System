@@ -13,3 +13,9 @@ deactivate
 python .\app.py
 
 pip install flask_sqlalchemy
+
+python
+
+from app import db
+
+db.create_all()
