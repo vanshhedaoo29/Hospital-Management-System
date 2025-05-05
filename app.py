@@ -401,9 +401,9 @@ def create_payment_link(amount, patient_email):
                 "email": patient_email
             },
             "notify": {
-                "email": True
+                "email": False
             },
-            "reminder_enable": True
+            "reminder_enable": False
         })
         print(f"✅ Created Razorpay link: {response['short_url']}")
         return response['short_url']
