@@ -482,6 +482,17 @@ Orchid Clinic"""
     return redirect(url_for("dashboard"))
 
 
+@app.route("/delete_appointment/<int:id>", methods=["POST"])
+def delete_appointment(id):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM appointments WHERE id=?", (id,))
+    conn.commit()
+    conn.close()
+    flash("❌ Appointment deleted successfully", "s-deleted")
+    return redirect(url_for("dashboard"))
+
+
 
 
 if __name__ == "__main__":

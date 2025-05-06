@@ -114,6 +114,23 @@ td.status-cancelled {
   margin-top: 0.4rem;
 }
 
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Adjust spacing between buttons */
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.delete-btn:hover {
+  color: red;
+}
 
 
     </style>
@@ -200,17 +217,22 @@ td.status-cancelled {
   {{ a[10] }}
 </td>
 
-              <td>
-                <form action="/update_status/{{ a[0] }}" method="POST">
-                  <select name="status" class="select-status" id="status-{{ a[0] }}">
-                    <option value="Pending" {% if a[10] == 'Pending' %}selected{% endif %}>Pending</option>
-                    <option value="Approved" {% if a[10] == 'Approved' %}selected{% endif %}>Approved</option>
-                    <option value="Cancelled" {% if a[10] == 'Cancelled' %}selected{% endif %}>Cancelled</option>
-                  </select>
-                  <button type="submit" class="update-btn">Update</button>
-                </form>
-                
-              </td>
+<td >
+  <div class="action-buttons">
+    <form action="/update_status/{{ a[0] }}" method="POST">
+      <select name="status" class="select-status" id="status-{{ a[0] }}">
+        <option value="Pending" {% if a[10] == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="Approved" {% if a[10] == 'Approved' %}selected{% endif %}>Approved</option>
+        <option value="Cancelled" {% if a[10] == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+      </select>
+      <button type="submit" class="update-btn">Update</button>
+    </form>
+    <form action="/delete_appointment/{{ a[0] }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this appointment?');" style="display:inline;">
+      <button type="submit" class="delete-btn" title="Delete Appointment">🗑️</button>
+    </form>
+  </div>
+  
+</td>
             </tr>
             {% endfor %}
           </tbody>
