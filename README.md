@@ -1,1 +1,1 @@
-# Mini-Project-2
+# Hospital Management System
